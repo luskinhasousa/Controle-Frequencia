@@ -1,0 +1,43 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin" // Certifique-se de que o plugin Flutter está configurado corretamente
+}
+
+android {
+    namespace = "com.example.controle_frequencia_alunos"
+    compileSdk = 35 // Definir explicitamente a versão do SDK de compilação
+    compileSdkVersion 35
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        applicationId "com.example.controle_frequencia_alunos"
+        minSdkVersion 21
+        targetSdkVersion 35
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+    release {
+        // Ativar ou desativar a redução de recursos e código.
+        minifyEnabled false // Desative a minificação do código
+        shrinkResources false // Desative a redução de recursos
+        // Usar a chave de debug para o release (para fins de teste)
+        signingConfig signingConfigs.debug
+    }
+}
+
+}
+
+flutter {
+    source = "../.."
+}
