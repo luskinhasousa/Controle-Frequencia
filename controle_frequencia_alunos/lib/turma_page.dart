@@ -3,22 +3,24 @@ import 'models.dart';
 
 class TurmaPage extends StatelessWidget {
   final List<Turma> turmas;
-  final String acao; // A ação passada (registrar ou relatório)
+  final String acao; // Recebe a ação
 
   const TurmaPage({Key? key, required this.turmas, required this.acao}) : super(key: key);
 
-  void _navegarParaAcao(BuildContext context, Turma turma) {
+  void _navegarParaSelecaoDeData(BuildContext context, Turma turma) {
     if (acao == 'registrar') {
+      // Se a ação for registrar frequência
       Navigator.pushNamed(
         context,
-        '/registroPresenca',
-        arguments: turma,
+        '/seletorData',
+        arguments: {'turma': turma, 'acao': 'registrar'}, // Passa ação para selecionar data
       );
     } else if (acao == 'relatorio') {
+      // Se a ação for visualizar relatório
       Navigator.pushNamed(
         context,
-        '/relatorioPresenca',
-        arguments: turma,
+        '/seletorData',
+        arguments: {'turma': turma, 'acao': 'relatorio'}, // Passa ação para selecionar data
       );
     }
   }
@@ -36,7 +38,7 @@ class TurmaPage extends StatelessWidget {
           return ListTile(
             title: Text(turma.nome),
             onTap: () {
-              _navegarParaAcao(context, turma); // Navegar para a ação correta (registrar ou relatório)
+              _navegarParaSelecaoDeData(context, turma); // Navega para a seleção de data
             },
           );
         },
