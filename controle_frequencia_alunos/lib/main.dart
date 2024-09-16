@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'models.dart';
 import './home_page.dart';
 import 'registro_presenca_page.dart';
-import 'relatorio_presenca_page.dart'; // Página de relatório de presença
+import 'relatorio_presenca_page.dart'; 
 import 'turma_page.dart';
 import 'seletor_data_page.dart';
+import 'package:intl/date_symbol_data_local.dart'; 
+import 'package:flutter_localizations/flutter_localizations.dart'; 
 
 void main() {
-  runApp(MyApp());
+  // Inicializa a formatação de datas para pt_BR
+  initializeDateFormatting('pt_BR', null).then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -27,6 +32,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: const Locale('pt', 'BR'),
+      supportedLocales: [
+        const Locale('en', 'US'), 
+        const Locale('pt', 'BR'), 
+      ],
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale?.languageCode &&
+              supportedLocale.countryCode == locale?.countryCode) {
+            return supportedLocale;
+          }
+        }
+        return supportedLocales.first;
+      },
       title: 'Controle de Frequência de Alunos',
       theme: ThemeData(
         primarySwatch: Colors.blue,
