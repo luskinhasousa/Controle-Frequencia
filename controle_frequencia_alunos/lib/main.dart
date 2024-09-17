@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'models.dart';
 import './home_page.dart';
 import 'registro_presenca_page.dart';
-import 'relatorio_presenca_page.dart'; 
+import 'relatorio_presenca_page.dart';
 import 'turma_page.dart';
 import 'seletor_data_page.dart';
-import 'package:intl/date_symbol_data_local.dart'; 
-import 'package:flutter_localizations/flutter_localizations.dart'; 
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   // Inicializa a formatação de datas para pt_BR
-  initializeDateFormatting('pt_BR', null).then((_) {
+  initializeDateFormatting('pt_BR').then((_) {
     runApp(MyApp());
   });
 }
@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       locale: const Locale('pt', 'BR'),
       supportedLocales: [
-        const Locale('en', 'US'), 
-        const Locale('pt', 'BR'), 
+        const Locale('en', 'US'),
+        const Locale('pt', 'BR'),
       ],
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'models.dart';
 
 class SeletorDataPage extends StatefulWidget {
   final Map<String, dynamic> arguments;
