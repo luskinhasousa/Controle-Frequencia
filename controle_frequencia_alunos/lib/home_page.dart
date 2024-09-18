@@ -20,18 +20,29 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Controle de Frequência'),
+        title: const Text(''),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Adiciona a imagem no topo
+            Image.asset(
+              'assets/images/logo_ponto.png', // Certifique-se de que esse caminho está correto
+              width: 200, // Ajuste o tamanho conforme necessário
+            ),
+            const SizedBox(height: 40), // Espaço entre a imagem e os botões
+
+            // Botão de Registrar Frequência
             ElevatedButton(
               onPressed: () {
                 _navegarParaSelecaoDeTurma(context, 'registrar'); // Ação de registrar frequência
               },
               child: const Text('Registrar Frequência'),
             ),
+            const SizedBox(height: 20), // Espaço entre os botões
+
+            // Botão de Visualizar Relatório de Frequência
             ElevatedButton(
               onPressed: () {
                 _navegarParaSelecaoDeTurma(context, 'relatorio'); // Ação de visualizar relatório

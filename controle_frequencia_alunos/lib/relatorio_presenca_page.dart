@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:share_plus/share_plus.dart';
 import 'models.dart'; 
+import 'text_export.dart';  // Importa a função de exportação em texto
 
 class RelatorioPresencaPage extends StatelessWidget {
   final Turma turma;
@@ -31,7 +32,7 @@ class RelatorioPresencaPage extends StatelessWidget {
                 final registro = registros[aluno.id]?.firstWhere(
                       (r) => mesmaData(r.data, dataSelecionada),
                       orElse: () => RegistroPresenca(alunoId: aluno.id, data: dataSelecionada, presente: false),
-                    ) ??
+                    ) ?? 
                     RegistroPresenca(alunoId: aluno.id, data: dataSelecionada, presente: false);
                 return pw.Text('${aluno.nome}: ${registro.presente ? 'Presente' : 'Ausente'}');
               }).toList(),
@@ -49,20 +50,23 @@ class RelatorioPresencaPage extends StatelessWidget {
     await Share.shareXFiles([XFile(file.path)], text: 'Relatório de Presença - ${turma.nome}');
   }
 
+  Future<void> exportarRelatorioTexto() async {
+    // Chama a função que exporta o relatório em texto
+    await exportarRelatorioEmTexto(turma, registros, dataSelecionada);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<RegistroPresenca> registrosTurma = [];
 
     for (var aluno in turma.alunos) {
       if (registros.containsKey(aluno.id)) {
-  
         var registroAluno = registros[aluno.id]!.firstWhere(
           (registro) => mesmaData(registro.data, dataSelecionada),
           orElse: () => RegistroPresenca(alunoId: aluno.id, data: dataSelecionada, presente: false), 
         );
         registrosTurma.add(registroAluno);
       } else {
-        
         registrosTurma.add(RegistroPresenca(alunoId: aluno.id, data: dataSelecionada, presente: false));
       }
     }
@@ -75,6 +79,12 @@ class RelatorioPresencaPage extends StatelessWidget {
             icon: Icon(Icons.picture_as_pdf),
             onPressed: () {
               exportarRelatorioPDF(); 
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.text_snippet),  // Adiciona um ícone para exportar em texto
+            onPressed: () {
+              exportarRelatorioTexto(); // Chama a função de exportar para texto
             },
           ),
         ],

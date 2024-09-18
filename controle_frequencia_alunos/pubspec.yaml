@@ -18,6 +18,7 @@ dependencies:
   path_provider: ^2.0.11  # Mantida esta versão
   share_plus: 10.0.2
   win32: ^5.0.0
+  printing: ^5.9.0
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +27,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/logo_ponto.png
